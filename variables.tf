@@ -1,10 +1,10 @@
 variable "region" {
   default = "us-east-1"
 }
-variable "profile" {
+/*variable "profile" {
   type = string
   
-}
+}*/
 variable "subnet_count" {
   default = 2
 }
