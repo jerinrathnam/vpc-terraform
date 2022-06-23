@@ -9,9 +9,9 @@ terraform {
 
 
 provider "aws" {
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key 
-  #profile = var.profile
+  #access_key = var.aws_access_key
+  #secret_key = var.aws_secret_key 
+  profile = var.profile
   region  = var.region
 }
 
@@ -26,9 +26,10 @@ module "vpc" {
   name = "jerin-primary"
 
   cidr            = var.cidr_block
-  azs             = slice(data.aws_availability_zones.available.names, 0, var.subnet_count)
-  private_subnets = var.private_subnets
-  public_subnets  = var.public_subnets
+  azs             = slice(data.aws_availability_zones.available.names, 0, var.subnet_count[terraform.workspace])
+  public_subnets  = [for subnet in range(var.subnet_count[terraform.workspace]) : cidrsubnet(var.public_cidr_block, 8, subnet)]
+  private_subnets = [for subnet in range(var.subnet_count[terraform.workspace]) : cidrsubnet(var.private_cidr_block, 8, subnet)]
+  
 
   enable_nat_gateway = false
 
