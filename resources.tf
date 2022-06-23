@@ -9,9 +9,9 @@ terraform {
 
 
 provider "aws" {
-  #access_key = var.aws_access_key
-  #secret_key = var.aws_secret_key 
-  profile = var.profile
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key 
+  #profile = var.profile
   region  = var.region
 }
 
@@ -33,7 +33,7 @@ module "vpc" {
 
   enable_nat_gateway = false
 
-  create_database_subnet_group = false
+  create_database_subnet_group = false#
 
 
   tags = {
