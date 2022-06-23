@@ -1,10 +1,7 @@
 variable "region" {
   default = "us-east-1"
 }
-variable "profile" {
-  type = string
-  
-}
+
 variable "subnet_count" {
  # default = 2
 }
@@ -28,6 +25,10 @@ variable "private_subnets" {
 variable "public_subnets" {
   type = list(any)
 } 
+variable "profile" {
+  type = string
+  
+}
 */
 variable "aws_access_key" {
   type      = string
