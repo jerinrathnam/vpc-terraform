@@ -27,9 +27,8 @@ module "vpc" {
 
   cidr            = var.cidr_block
   azs             = slice(data.aws_availability_zones.available.names, 0, var.subnet_count[terraform.workspace])
-  public_subnets  = [for subnet in range(var.subnet_count[terraform.workspace]) : cidrsubnet(var.public_cidr_block, 8, subnet)]
-  private_subnets = [for subnet in range(var.subnet_count[terraform.workspace]) : cidrsubnet(var.private_cidr_block, 8, subnet)]
-  
+  public_subnets  = [for subnet in range(var.subnet_count[terraform.workspace]) : cidrsubnet(var.cidr_block, 8, subnet+10)]
+  private_subnets = [for subnet in range(var.subnet_count[terraform.workspace]) : cidrsubnet(var.cidr_block, 8, subnet+20)]
 
   enable_nat_gateway = false
 
